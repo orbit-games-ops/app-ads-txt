@@ -3,553 +3,388 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Arts | AAA Mobile Gaming</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Universal Arts | Interactive Entertainment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #ff2a2a; /* Neon Red */
-            --accent: #00f2ff; /* Cyber Blue */
-            --dark: #050505;
-            --dark-glass: rgba(10, 10, 10, 0.85);
-            --light: #ffffff;
-            --text-gray: #b3b3b3;
-            --card-bg: #111111;
+            --primary: #00ff9d; /* Tech Green */
+            --secondary: #7000ff; /* Deep Purple */
+            --dark: #08080a; /* Almost Black */
+            --surface: #121214; /* Card BG */
+            --text-main: #ffffff;
+            --text-muted: #888899;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            scroll-behavior: smooth;
         }
 
         body {
             background-color: var(--dark);
-            color: var(--light);
-            font-family: 'Rajdhani', sans-serif;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        h1, h2, h3, .nav-logo {
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-        }
-
-        /* --- Custom Scrollbar --- */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--dark);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 5px;
-        }
-
-        /* --- Navigation --- */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            background: var(--dark-glass);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .nav-logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: var(--light);
-        }
-
-        .nav-logo span {
-            color: var(--primary);
-            text-shadow: 0 0 10px rgba(255, 42, 42, 0.5);
-        }
-
-        .nav-links a {
-            margin-left: 2.5rem;
-            text-decoration: none;
-            color: var(--light);
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
-            font-size: 1.1rem;
-            transition: color 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        .nav-links a:hover {
-            color: var(--primary);
+        /* --- Utilities --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
-        .play-btn {
-            background: linear-gradient(45deg, var(--primary), #a80000);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 0 20px rgba(255, 42, 42, 0.4);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 2px solid transparent;
-        }
-
-        .play-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 42, 42, 0.6);
-            border-color: rgba(255,255,255,0.2);
-        }
-
-        /* --- Hero Section --- */
-        header {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(5,5,5,1) 100%), 
-                        url('
-
-http://googleusercontent.com/image_collection/image_retrieval/6770177813329539468_0
-');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* Parallax effect */
-        }
-
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 150px;
-            background: linear-gradient(to top, var(--dark), transparent);
-        }
-
-        .hero-content {
-            z-index: 2;
-            padding: 0 20px;
-        }
-
-        .hero-badge {
-            background: rgba(255, 42, 42, 0.2);
-            color: var(--primary);
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            border: 1px solid var(--primary);
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-        }
-
-        header h1 {
-            font-size: 5rem;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.8);
-        }
-
-        header p {
-            font-size: 1.5rem;
-            color: var(--text-gray);
-            max-width: 700px;
-            margin: 0 auto 2.5rem;
-        }
-
-        /* --- Stats Strip --- */
-        .stats-strip {
-            display: flex;
-            justify-content: center;
-            gap: 5rem;
-            padding: 3rem 0;
-            background: #0a0a0a;
-            border-top: 1px solid #222;
-            border-bottom: 1px solid #222;
-            flex-wrap: wrap;
-        }
-
-        .stat-box {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: var(--light);
-            font-family: 'Orbitron', sans-serif;
-            background: -webkit-linear-gradient(white, #777);
+        .text-gradient {
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .stat-label {
-            color: var(--primary);
+        .btn {
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 700;
-        }
-
-        /* --- Games Grid --- */
-        .section-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 6rem 5%;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 5rem;
-        }
-
-        .section-header h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .section-header .line {
-            width: 100px;
-            height: 4px;
-            background: var(--primary);
-            margin: 0 auto;
-            border-radius: 2px;
-            box-shadow: 0 0 10px var(--primary);
-        }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .game-card {
-            background: var(--card-bg);
-            border-radius: 15px;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
             overflow: hidden;
-            position: relative;
-            transition: transform 0.4s, box-shadow 0.4s;
-            border: 1px solid #222;
-            group;
         }
 
-        .game-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        .btn-primary {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0%; height: 100%;
+            background: var(--primary);
+            z-index: -1;
+            transition: width 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            color: var(--dark);
+        }
+
+        .btn-primary:hover::before {
+            width: 100%;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            padding: 2rem 0;
+            position: absolute;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .logo span { color: var(--primary); }
+
+        .nav-links a {
+            color: var(--text-muted);
+            margin-left: 2rem;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        /* --- Hero Section (Dev Focus) --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(circle at 80% 20%, rgba(0, 255, 157, 0.1) 0%, transparent 40%),
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(8, 8, 10, 0.85); /* Dark overlay to make text pop */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+
+        /* --- Tech Stack / Expertise --- */
+        .expertise {
+            padding: 6rem 0;
+            background: var(--dark);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 1.5rem;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .tech-card {
+            background: var(--surface);
+            padding: 2.5rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+
+        .tech-card:hover {
             border-color: var(--primary);
+            transform: translateY(-5px);
         }
 
-        .card-image-wrapper {
+        .tech-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .tech-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- Portfolio --- */
+        .projects {
+            padding: 6rem 0;
+            background: #0d0d10;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .project-card {
             position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--surface);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .project-img-container {
             height: 250px;
             overflow: hidden;
         }
 
-        .game-img {
+        /* USING RELIABLE UNSPLASH IMAGES FOR DEMO */
+        .project-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform 0.5s ease;
         }
 
-        .game-card:hover .game-img {
+        .project-card:hover .project-img {
             transform: scale(1.1);
         }
 
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .game-card:hover .overlay {
-            opacity: 1;
-        }
-
-        .card-content {
+        .project-info {
             padding: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
-        .genre-tag {
-            font-size: 0.8rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .game-card h3 {
-            font-size: 1.5rem;
+        .badge {
+            font-size: 0.75rem;
+            color: var(--primary);
+            background: rgba(0, 255, 157, 0.1);
+            padding: 4px 10px;
+            border-radius: 20px;
             margin-bottom: 1rem;
-            color: white;
-        }
-
-        .game-card p {
-            color: var(--text-gray);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .download-btn {
             display: inline-block;
-            width: 100%;
-            text-align: center;
-            padding: 1rem;
-            background: #222;
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 8px;
-            transition: 0.3s;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
         }
 
-        .download-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
+        .project-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .project-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
 
         /* --- Footer --- */
         footer {
-            background: #000;
-            padding: 4rem 5% 2rem;
-            border-top: 1px solid #222;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            margin-bottom: 3rem;
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .footer-brand h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .footer-brand p {
-            color: var(--text-gray);
-            max-width: 300px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .social-links a {
-            color: var(--light);
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-
-        .social-links a:hover {
-            color: var(--primary);
-        }
-
-        .copyright {
+            padding: 4rem 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
             text-align: center;
-            color: #555;
-            padding-top: 2rem;
-            border-top: 1px solid #111;
-            font-size: 0.9rem;
+            color: var(--text-muted);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            header h1 { font-size: 3rem; }
+        /* Mobile */
+        @media(max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
             .nav-links { display: none; }
-            .stats-strip { gap: 2rem; }
-            .stat-number { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="nav-logo">UNIVERSAL <span>ARTS</span></div>
-        <div class="nav-links">
-            <a href="#games">Games</a>
-            <a href="#about">Studio</a>
-            <a href="https://play.google.com/store/apps/dev?id=5883999573057760065" class="play-btn">
-                <i class="fab fa-google-play"></i> Play Store
-            </a>
+        <div class="container nav-content">
+            <div class="logo">UNIVERSAL<span class="text-gradient">ARTS</span></div>
+            <div class="nav-links">
+                <a href="#expertise">Expertise</a>
+                <a href="#work">Portfolio</a>
+                <a href="https://play.google.com/store/apps/dev?id=5883999573057760065">Google Play</a>
+            </div>
         </div>
     </nav>
 
-    <header>
-        <div class="hero-content" data-aos="zoom-in" data-aos-duration="1000">
-            <span class="hero-badge">Next Gen Simulation</span>
-            <h1>DOMINATE<br>THE ROAD</h1>
-            <p>From high-speed racing to heavy cargo logistics. Experience the most realistic physics on mobile.</p>
-            <a href="#games" class="play-btn" style="font-size: 1.2rem;">EXPLORE LIBRARY</a>
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content" data-aos="fade-up">
+            <h4><span class="text-gradient">GAME DEVELOPMENT STUDIO</span></h4>
+            <h1>ENGINEERING <br>IMMERSIVE WORLDS.</h1>
+            <p>We combine high-fidelity physics, optimized rendering, and engaging gameplay mechanics to create top-tier mobile simulation experiences.</p>
+            <a href="#work" class="btn btn-primary">View Our Projects</a>
         </div>
-    </header>
+    </section>
 
-    <div class="stats-strip" id="about" data-aos="fade-up">
-        <div class="stat-box">
-            <div class="stat-number">10+</div>
-            <div class="stat-label">Global Titles</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-number">4.0+</div>
-            <div class="stat-label">Avg Rating</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-number">1M+</div>
-            <div class="stat-label">Downloads</div>
-        </div>
-    </div>
-
-    <section id="games" class="section-container">
-        <div class="section-header" data-aos="fade-up">
-            <h2>Featured Games</h2>
-            <div class="line"></div>
-        </div>
-
-        <div class="games-grid">
-            
-            <div class="game-card" data-aos="fade-up" data-aos-delay="0">
-                <div class="card-image-wrapper">
-                    <img src="http://googleusercontent.com/image_collection/image_retrieval/9879912123038968894_0" alt="GT Car Racing" class="game-img">
-                    <div class="overlay">
-                        <i class="fas fa-gamepad" style="font-size: 3rem; color: white;"></i>
-                    </div>
+    <section id="expertise" class="expertise">
+        <div class="container">
+            <h2 class="section-title">Development Capabilities</h2>
+            <div class="tech-grid">
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="0">
+                    <i class="fas fa-cube"></i>
+                    <h3>Unity 3D Engine</h3>
+                    <p>Leveraging the full power of Unity specifically for mobile optimization, HDRP rendering, and cross-platform scalability.</p>
                 </div>
-                <div class="card-content">
-                    <span class="genre-tag">Racing / Stunts</span>
-                    <h3>GT Car Racing Stunt</h3>
-                    <p>Defy gravity on impossible tracks. Perform mid-air flips and extreme drifts in our #1 rated racer.</p>
-                    <a href="https://play.google.com/store/apps/details?id=com.ua.gt.car.stunt.racing.games" target="_blank" class="download-btn">
-                        Install Free <i class="fas fa-download"></i>
-                    </a>
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-car-crash"></i>
+                    <h3>Advanced Physics</h3>
+                    <p>Custom vehicle controllers and rigid-body simulations designed to mimic real-world friction, suspension, and mass.</p>
+                </div>
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-layer-group"></i>
+                    <h3>Level Design</h3>
+                    <p>Creating expansive, open-world environments and intricate race tracks using efficient occlusion culling and LODs.</p>
+                </div>
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile Optimization</h3>
+                    <p>Ensuring 60FPS performance across a wide range of Android devices through strict asset management and code profiling.</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="game-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="card-image-wrapper">
-                    <img src="http://googleusercontent.com/image_collection/image_retrieval/9272997600207014705_0" alt="Cargo Truck" class="game-img">
-                    <div class="overlay">
-                        <i class="fas fa-truck-moving" style="font-size: 3rem; color: white;"></i>
+    <section id="work" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Titles</h2>
+            <div class="project-grid">
+
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-img-container">
+                        <img src="https://images.unsplash.com/photo-1614200187524-dc411b872395?q=80&w=1000&auto=format&fit=crop" alt="GT Racing" class="project-img">
+                    </div>
+                    <div class="project-info">
+                        <span class="badge">UNITY 3D</span> <span class="badge">RACING</span>
+                        <h3>GT Car Racing Stunt</h3>
+                        <p>A high-speed physics showcase featuring impossible tracks and mega-ramp stunts. Optimized for fluid controls.</p>
+                        <a href="https://play.google.com/store/apps/dev?id=5883999573057760065" class="btn btn-primary">View on Play Store</a>
                     </div>
                 </div>
-                <div class="card-content">
-                    <span class="genre-tag">Simulation</span>
-                    <h3>Cargo Truck Driving</h3>
-                    <p>Master the art of heavy logistics. Transport valuable cargo across dangerous terrain and highways.</p>
-                    <a href="https://play.google.com/store/apps/details?id=com.ua.cargo.truck.driving.games" target="_blank" class="download-btn">
-                        Install Free <i class="fas fa-download"></i>
-                    </a>
-                </div>
-            </div>
 
-            <div class="game-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="card-image-wrapper">
-                    <img src="http://googleusercontent.com/image_collection/image_retrieval/10949153123895642008_0" alt="Offroad Jeep" class="game-img">
-                    <div class="overlay">
-                        <i class="fas fa-mountain" style="font-size: 3rem; color: white;"></i>
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-img-container">
+                        <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=1000&auto=format&fit=crop" alt="Cargo Truck" class="project-img">
+                    </div>
+                    <div class="project-info">
+                        <span class="badge">SIMULATION</span> <span class="badge">LOGISTICS</span>
+                        <h3>Cargo Truck Driving</h3>
+                        <p>Heavy vehicle simulation focusing on weight distribution, terrain interaction, and delivery logistics.</p>
+                        <a href="https://play.google.com/store/apps/dev?id=5883999573057760065" class="btn btn-primary">View on Play Store</a>
                     </div>
                 </div>
-                <div class="card-content">
-                    <span class="genre-tag">Offroad / 4x4</span>
-                    <h3>Offroad Jeep Simulator</h3>
-                    <p>No roads, no rules. Conquer mud, rivers, and steep hills in realistic 4x4 physics environments.</p>
-                    <a href="https://play.google.com/store/apps/details?id=com.ua.offroad.jeep.driving.games" target="_blank" class="download-btn">
-                        Install Free <i class="fas fa-download"></i>
-                    </a>
-                </div>
-            </div>
 
-            <div class="game-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="card-image-wrapper">
-                    <img src="http://googleusercontent.com/image_collection/image_retrieval/6974544593591319801_0" alt="City Taxi" class="game-img">
-                    <div class="overlay">
-                        <i class="fas fa-taxi" style="font-size: 3rem; color: white;"></i>
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-img-container">
+                        <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=1000&auto=format&fit=crop" alt="Offroad Jeep" class="project-img">
+                    </div>
+                    <div class="project-info">
+                        <span class="badge">OFFROAD</span> <span class="badge">PHYSICS</span>
+                        <h3>Offroad Jeep Simulator</h3>
+                        <p>4x4 mechanics pushed to the limit. Mud physics and suspension systems designed for rough terrain environments.</p>
+                        <a href="https://play.google.com/store/apps/dev?id=5883999573057760065" class="btn btn-primary">View on Play Store</a>
                     </div>
                 </div>
-                <div class="card-content">
-                    <span class="genre-tag">Arcade Sim</span>
-                    <h3>City Taxi Auto Racer</h3>
-                    <p>Navigate the urban jungle. Pick up passengers and race against the clock in bustling city traffic.</p>
-                    <a href="https://play.google.com/store/apps/details?id=com.ua.city.taxi.driving.games" target="_blank" class="download-btn">
-                        Install Free <i class="fas fa-download"></i>
-                    </a>
-                </div>
-            </div>
 
+            </div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <h2>UNIVERSAL <span>ARTS</span></h2>
-                <p>Creating immersive 3D simulation experiences for mobile gamers worldwide.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-discord"></i></a>
-                </div>
+        <div class="container">
+            <div class="logo" style="margin-bottom: 1rem;">UNIVERSAL<span class="text-gradient">ARTS</span></div>
+            <p>&copy; 2025 Universal Arts. Built for Gamers.</p>
+            <div style="margin-top: 1rem; font-size: 1.5rem;">
+                <i class="fab fa-unity" style="margin: 0 10px;"></i>
+                <i class="fab fa-android" style="margin: 0 10px;"></i>
             </div>
-        </div>
-        <div class="copyright">
-            &copy; 2025 Universal Arts. All rights reserved. Built for Gamers.
         </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Initialize Animate On Scroll
         AOS.init({
-            once: true,
-            offset: 100,
-            duration: 800,
-            easing: 'ease-out-cubic'
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.style.background = 'rgba(5, 5, 5, 0.95)';
-                nav.style.padding = '1rem 5%';
-            } else {
-                nav.style.background = 'rgba(10, 10, 10, 0.7)';
-                nav.style.padding = '1.5rem 5%';
-            }
+            duration: 1000,
+            once: true
         });
     </script>
 </body>
