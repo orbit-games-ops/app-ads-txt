@@ -3,388 +3,401 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Arts | Interactive Entertainment</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Orbit Games | Premium Interactive Entertainment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
+        /* --- PREMIUM VARIABLES --- */
         :root {
-            --primary: #00ff9d; /* Tech Green */
-            --secondary: #7000ff; /* Deep Purple */
-            --dark: #08080a; /* Almost Black */
-            --surface: #121214; /* Card BG */
-            --text-main: #ffffff;
-            --text-muted: #888899;
-            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            /* Refined Palette */
+            --primary: #00EDA0; /* Electric Emerald */
+            --secondary: #8A2EFF; /* Deep Violet */
+            --bg-dark: #050507; /* Deepest Black */
+            --bg-surface: rgba(20, 20, 25, 0.7); /* Glass Surface */
+            --text-light: #ffffff;
+            --text-muted: #a0a0b0;
+            --gradient-accent: linear-gradient(135deg, var(--primary), var(--secondary));
+            --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+            --glass-blur: blur(12px);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* --- RESET & BASE STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body {
-            background-color: var(--dark);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Open Sans', sans-serif;
             overflow-x: hidden;
-            line-height: 1.6;
+            line-height: 1.7;
+        }
+        h1, h2, h3, h4, .nav-logo { font-family: 'Montserrat', sans-serif; font-weight: 800; letter-spacing: -0.5px; }
+        a { text-decoration: none; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--secondary); border-radius: 10px; }
+
+        /* Scroll Progress Bar */
+        #scroll-progress {
+            position: fixed; top: 0; left: 0; width: 0%; height: 3px;
+            background: var(--gradient-accent); z-index: 9999;
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
+        /* --- PRELOADER --- */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-dark); z-index: 10000;
+            display: flex; justify-content: center; align-items: center; flex-direction: column;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
         }
-
-        /* --- Utilities --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        .loader-logo {
+            font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 2rem;
+            animation: pulse 2s infinite ease-in-out;
         }
+        .loader-logo span { color: var(--primary); }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(0.95); } }
+        .preloader-hide { opacity: 0; visibility: hidden; }
 
+        /* --- UTILITIES --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
         .text-gradient {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background: var(--gradient-accent); -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; display: inline-block;
         }
 
+        /* Premium Button */
         .btn {
-            padding: 12px 30px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
+            padding: 14px 35px; border-radius: 50px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;
+            position: relative; overflow: hidden; transition: all 0.4s ease;
+            z-index: 1; display: inline-flex; align-items: center; gap: 10px;
         }
-
-        .btn-primary {
-            background: transparent;
-            color: var(--primary);
+        .btn-glow {
+            background: rgba(0, 237, 160, 0.1); color: var(--primary);
             border: 1px solid var(--primary);
+            box-shadow: 0 0 15px rgba(0, 237, 160, 0.2);
         }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 0%; height: 100%;
-            background: var(--primary);
-            z-index: -1;
-            transition: width 0.3s ease;
+        .btn-glow::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 0%; height: 100%;
+            background: var(--gradient-accent); z-index: -1; transition: width 0.4s ease-in-out;
         }
+        .btn-glow:hover { color: var(--bg-dark); box-shadow: 0 0 30px rgba(0, 237, 160, 0.5); border-color: transparent; }
+        .btn-glow:hover::before { width: 100%; }
 
-        .btn-primary:hover {
-            color: var(--dark);
-        }
-
-        .btn-primary:hover::before {
-            width: 100%;
-        }
-
-        /* --- Navbar --- */
+        /* --- NAVBAR (Glassmorphism) --- */
         nav {
-            padding: 2rem 0;
-            position: absolute;
-            width: 100%;
-            z-index: 10;
+            position: fixed; top: 0; width: 100%; padding: 1.2rem 0; z-index: 100;
+            background: rgba(5, 5, 7, 0.8); backdrop-filter: var(--glass-blur);
+            border-bottom: var(--glass-border); transition: all 0.4s ease;
         }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -1px;
-        }
-
-        .logo span { color: var(--primary); }
-
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-size: 1.6rem; color: white; }
         .nav-links a {
-            color: var(--text-muted);
-            margin-left: 2rem;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: 0.3s;
+            color: var(--text-muted); font-weight: 600; font-size: 0.9rem;
+            margin-left: 2.5rem; text-transform: uppercase; letter-spacing: 1px;
+            transition: color 0.3s; position: relative;
         }
-
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 2px;
+            background: var(--primary); transition: width 0.3s;
+        }
         .nav-links a:hover { color: var(--primary); }
+        .nav-links a:hover::after { width: 100%; }
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; color: var(--text-light); }
 
-        /* --- Hero Section (Dev Focus) --- */
+        /* --- HERO SECTION (Particles) --- */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: radial-gradient(circle at 80% 20%, rgba(0, 255, 157, 0.1) 0%, transparent 40%),
-                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
-            position: relative;
+            min-height: 100vh; display: flex; align-items: center; position: relative;
+            overflow: hidden; padding-top: 80px;
         }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(8, 8, 10, 0.85); /* Dark overlay to make text pop */
+        #particles-js {
+            position: absolute; width: 100%; height: 100%; top: 0; left: 0;
+            background: var(--bg-dark); z-index: 1;
         }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
+        /* Subtle background image overlaying particles for depth */
+        .hero-bg-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, var(--bg-dark) 90%),
+                        url('image_0.png') no-repeat center center/cover;
+            opacity: 0.2; z-index: 2; mix-blend-mode: overlay;
         }
-
+        .hero-content { position: relative; z-index: 3; max-width: 900px; }
+        .hero-subtitle {
+            font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 1rem; display: block;
+        }
         .hero h1 {
-            font-size: 4.5rem;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
+            font-size: 5rem; line-height: 1.05; margin-bottom: 1.5rem;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .hero p { font-size: 1.3rem; color: var(--text-muted); max-width: 650px; margin-bottom: 3rem; }
+
+        /* --- SECTIONS COMMON --- */
+        section { padding: 8rem 0; position: relative; }
+        .section-header { text-align: center; margin-bottom: 5rem; }
+        .section-title { font-size: 3rem; margin-bottom: 1rem; display: inline-block; }
+        .section-line {
+            width: 60px; height: 4px; background: var(--gradient-accent);
+            margin: 0 auto; border-radius: 2px;
         }
 
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-        }
-
-        /* --- Tech Stack / Expertise --- */
-        .expertise {
-            padding: 6rem 0;
-            background: var(--dark);
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 4rem;
-            border-left: 4px solid var(--primary);
-            padding-left: 1.5rem;
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
+        /* --- EXPERTISE (Glass Cards) --- */
+        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2.5rem; }
         .tech-card {
-            background: var(--surface);
-            padding: 2.5rem;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s;
+            background: var(--bg-surface); backdrop-filter: var(--glass-blur);
+            border: var(--glass-border); padding: 3rem 2rem; border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy transition */
+            position: relative; overflow: hidden;
         }
-
-        .tech-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-5px);
+        .tech-card::before { /* Hover Gradient Glow */
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(138, 46, 255, 0.1) 0%, transparent 70%);
+            opacity: 0; transition: opacity 0.4s; z-index: -1;
         }
+        .tech-card:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(138, 46, 255, 0.3); }
+        .tech-card:hover::before { opacity: 1; }
+        .tech-card i { font-size: 3rem; margin-bottom: 2rem; }
+        .tech-card h3 { font-size: 1.4rem; margin-bottom: 1rem; }
+        .tech-card p { color: var(--text-muted); font-size: 0.95rem; }
 
-        .tech-card i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-card h3 {
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
-        }
-
-        .tech-card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* --- Portfolio --- */
-        .projects {
-            padding: 6rem 0;
-            background: #0d0d10;
-        }
-
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-        }
-
+        /* --- PORTFOLIO (3D Hover) --- */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 3rem; }
         .project-card {
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            background: var(--surface);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-radius: 20px; overflow: hidden;
+            background: var(--bg-surface); backdrop-filter: var(--glass-blur);
+            border: var(--glass-border); transition: all 0.5s ease;
+            transform-style: preserve-3d; perspective: 1000px;
         }
-
-        .project-img-container {
-            height: 250px;
-            overflow: hidden;
-        }
-
-        /* USING RELIABLE UNSPLASH IMAGES FOR DEMO */
-        .project-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .project-card:hover .project-img {
-            transform: scale(1.1);
-        }
-
-        .project-info {
-            padding: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
+        .project-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); border-color: var(--primary); }
+        .project-img-wrapper { height: 280px; overflow: hidden; position: relative; }
+        .project-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .project-card:hover .project-img { transform: scale(1.1); }
+        .project-content { padding: 2.5rem; position: relative; z-index: 2; }
+        .badge-container { display: flex; gap: 10px; margin-bottom: 1.2rem; }
         .badge {
-            font-size: 0.75rem;
-            color: var(--primary);
-            background: rgba(0, 255, 157, 0.1);
-            padding: 4px 10px;
-            border-radius: 20px;
-            margin-bottom: 1rem;
-            display: inline-block;
+            font-size: 0.7rem; font-weight: 700; color: var(--primary);
+            background: rgba(0, 237, 160, 0.15); padding: 6px 14px;
+            border-radius: 30px; letter-spacing: 1px;
         }
-
-        .project-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-        .project-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
-
-        /* --- Footer --- */
-        footer {
-            padding: 4rem 0;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            text-align: center;
-            color: var(--text-muted);
+        .project-content h3 { font-size: 1.8rem; margin-bottom: 0.8rem; }
+        .project-content p { margin-bottom: 2rem; color: var(--text-muted); }
+        .btn-text {
+            color: var(--text-light); font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; font-size: 0.9rem; transition: 0.3s;
         }
+        .btn-text:hover { color: var(--primary); gap: 15px; }
 
-        /* Mobile */
-        @media(max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            .nav-links { display: none; }
+        /* --- FOOTER --- */
+        footer { background: #020203; padding: 5rem 0; text-align: center; border-top: var(--glass-border); }
+        .footer-social { margin: 2rem 0; }
+        .footer-social a {
+            color: var(--text-muted); font-size: 1.5rem; margin: 0 15px;
+            transition: all 0.3s; display: inline-block;
+        }
+        .footer-social a:hover { color: var(--secondary); transform: translateY(-3px); }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3.5rem; }
+            .nav-links {
+                position: fixed; top: 0; right: 0; height: 100vh; width: 80%; max-width: 400px;
+                background: rgba(5, 5, 7, 0.98); backdrop-filter: blur(20px);
+                flex-direction: column; justify-content: center; align-items: center; gap: 3rem;
+                transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            }
+            .nav-links.active { transform: translateX(0); }
+            .hamburger { display: block; z-index: 101; }
+            .project-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2.8rem; }
+            .container { padding: 0 1.2rem; }
         }
     </style>
 </head>
-<body>
+<body id="top">
+
+    <div id="preloader">
+        <div class="loader-logo">ORBIT<span>GAMES</span></div>
+    </div>
+
+    <div id="scroll-progress"></div>
 
     <nav>
         <div class="container nav-content">
-            <div class="logo">UNIVERSAL<span class="text-gradient">ARTS</span></div>
+            <a href="#top" class="nav-logo">ORBIT<span class="text-gradient">GAMES</span></a>
+            <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
             <div class="nav-links">
-                <a href="#expertise">Expertise</a>
-                <a href="#work">Portfolio</a>
-                <a href="https://play.google.com/store/apps/dev?id=5883999573057760065">Google Play</a>
+                <a href="#expertise" onclick="toggleMenu()">Expertise</a>
+                <a href="#work" onclick="toggleMenu()">Portfolio</a>
+                <a href="https://play.google.com/store/apps/dev?id=5883999573057760065" class="btn btn-glow" style="margin-left: 2rem;">
+                    Google Play <i class="fab fa-google-play"></i>
+                </a>
             </div>
         </div>
     </nav>
 
     <section class="hero">
-        <div class="hero-overlay"></div>
-        <div class="container hero-content" data-aos="fade-up">
-            <h4><span class="text-gradient">GAME DEVELOPMENT STUDIO</span></h4>
-            <h1>ENGINEERING <br>IMMERSIVE WORLDS.</h1>
-            <p>We combine high-fidelity physics, optimized rendering, and engaging gameplay mechanics to create top-tier mobile simulation experiences.</p>
-            <a href="#work" class="btn btn-primary">View Our Projects</a>
+        <div id="particles-js"></div> <div class="hero-bg-overlay"></div> <div class="container hero-content" data-aos="fade-up" data-aos-duration="1200">
+            <span class="hero-subtitle"><span class="text-gradient">/// AAA MOBILE DEVELOPMENT</span></span>
+            <h1>FORGING <br>DIGITAL REALITIES.</h1>
+            <p>We push the boundaries of mobile hardware, blending high-fidelity physics with optimized rendering to create immersive simulation experiences.</p>
+            <a href="#work" class="btn btn-glow">Explore Portfolio <i class="fas fa-arrow-down"></i></a>
         </div>
     </section>
 
-    <section id="expertise" class="expertise">
+    <section id="expertise">
         <div class="container">
-            <h2 class="section-title">Development Capabilities</h2>
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">CORE <span class="text-gradient">CAPABILITIES</span></h2>
+                <div class="section-line"></div>
+            </div>
             <div class="tech-grid">
-                <div class="tech-card" data-aos="fade-up" data-aos-delay="0">
-                    <i class="fas fa-cube"></i>
-                    <h3>Unity 3D Engine</h3>
-                    <p>Leveraging the full power of Unity specifically for mobile optimization, HDRP rendering, and cross-platform scalability.</p>
-                </div>
                 <div class="tech-card" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-car-crash"></i>
-                    <h3>Advanced Physics</h3>
-                    <p>Custom vehicle controllers and rigid-body simulations designed to mimic real-world friction, suspension, and mass.</p>
+                    <i class="fab fa-unity text-gradient"></i>
+                    <h3>Unity Engine Mastery</h3>
+                    <p>Deep expertise in the Universal Render Pipeline (URP) for achieving console-quality visuals on mobile architecture.</p>
                 </div>
                 <div class="tech-card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-layer-group"></i>
-                    <h3>Level Design</h3>
-                    <p>Creating expansive, open-world environments and intricate race tracks using efficient occlusion culling and LODs.</p>
+                    <i class="fas fa-microchip text-gradient"></i>
+                    <h3>Physics Engineering</h3>
+                    <p>Proprietary vehicle dynamics systems simulating complex suspension, tire friction, and mass transfer.</p>
                 </div>
                 <div class="tech-card" data-aos="fade-up" data-aos-delay="300">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3>Mobile Optimization</h3>
-                    <p>Ensuring 60FPS performance across a wide range of Android devices through strict asset management and code profiling.</p>
+                    <i class="fas fa-vr-cardboard text-gradient"></i>
+                    <h3>Immersive Design</h3>
+                    <p>Focusing on player agency and environmental interaction to create expansive, believable game worlds.</p>
+                </div>
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-bolt text-gradient"></i>
+                    <h3>Extreme Optimization</h3>
+                    <p>Utilizing DOTS and advanced profiling to ensure smooth 60 FPS gameplay across a wide range of devices.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="work" class="projects">
+    <section id="work">
         <div class="container">
-            <h2 class="section-title">Featured Titles</h2>
+             <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">FEATURED <span class="text-gradient">TITLES</span></h2>
+                <div class="section-line"></div>
+            </div>
             <div class="project-grid">
-
                 <div class="project-card" data-aos="fade-up">
-                    <div class="project-img-container">
-                        <img src="https://images.unsplash.com/photo-1614200187524-dc411b872395?q=80&w=1000&auto=format&fit=crop" alt="GT Racing" class="project-img">
+                    <div class="project-img-wrapper">
+                        <img src="image_1.png" alt="GT Racing" class="project-img">
                     </div>
-                    <div class="project-info">
-                        <span class="badge">UNITY 3D</span> <span class="badge">RACING</span>
+                    <div class="project-content">
+                        <div class="badge-container">
+                            <span class="badge">ARCADE</span><span class="badge">STUNTS</span>
+                        </div>
                         <h3>GT Car Racing Stunt</h3>
-                        <p>A high-speed physics showcase featuring impossible tracks and mega-ramp stunts. Optimized for fluid controls.</p>
-                        <a href="https://play.google.com/store/apps/dev?id=5883999573057760065" class="btn btn-primary">View on Play Store</a>
+                        <p>High-octane arcade racing featuring gravity-defying tracks and explosive aerial stunts.</p>
+                        <a href="https://play.google.com/store/apps/dev?id=5883999573057760065" class="btn-text">
+                            View on Play Store <i class="fas fa-external-link-alt"></i>
+                        </a>
                     </div>
                 </div>
-
-                <div class="project-card" data-aos="fade-up">
-                    <div class="project-img-container">
-                        <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=1000&auto=format&fit=crop" alt="Cargo Truck" class="project-img">
+                <div class="project-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="project-img-wrapper">
+                        <img src="image_2.png" alt="Cargo Truck" class="project-img">
                     </div>
-                    <div class="project-info">
-                        <span class="badge">SIMULATION</span> <span class="badge">LOGISTICS</span>
+                    <div class="project-content">
+                        <div class="badge-container">
+                            <span class="badge">SIMULATION</span><span class="badge">OPEN WORLD</span>
+                        </div>
                         <h3>Cargo Truck Driving</h3>
-                        <p>Heavy vehicle simulation focusing on weight distribution, terrain interaction, and delivery logistics.</p>
-                        <a href="https://play.google.com/store/apps/dev?id=5883999573057760065" class="btn btn-primary">View on Play Store</a>
+                        <p>A definitive logistics simulator focusing on realistic weight distribution and long-haul economy.</p>
+                        <a href="https://play.google.com/store/apps/dev?id=5883999573057760065" class="btn-text">
+                            View on Play Store <i class="fas fa-external-link-alt"></i>
+                        </a>
                     </div>
                 </div>
-
-                <div class="project-card" data-aos="fade-up">
-                    <div class="project-img-container">
-                        <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=1000&auto=format&fit=crop" alt="Offroad Jeep" class="project-img">
+                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="project-img-wrapper">
+                        <img src="image_3.png" alt="Offroad Jeep" class="project-img">
                     </div>
-                    <div class="project-info">
-                        <span class="badge">OFFROAD</span> <span class="badge">PHYSICS</span>
+                    <div class="project-content">
+                        <div class="badge-container">
+                            <span class="badge">OFFROAD</span><span class="badge">PHYSICS SANDBOX</span>
+                        </div>
                         <h3>Offroad Jeep Simulator</h3>
-                        <p>4x4 mechanics pushed to the limit. Mud physics and suspension systems designed for rough terrain environments.</p>
-                        <a href="https://play.google.com/store/apps/dev?id=5883999573057760065" class="btn btn-primary">View on Play Store</a>
+                        <p>Conquer extreme terrain with cutting-edge mud, water, and soft-body suspension physics.</p>
+                        <a href="https://play.google.com/store/apps/dev?id=5883999573057760065" class="btn-text">
+                            View on Play Store <i class="fas fa-external-link-alt"></i>
+                        </a>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <div class="logo" style="margin-bottom: 1rem;">UNIVERSAL<span class="text-gradient">ARTS</span></div>
-            <p>&copy; 2025 Universal Arts. Built for Gamers.</p>
-            <div style="margin-top: 1rem; font-size: 1.5rem;">
-                <i class="fab fa-unity" style="margin: 0 10px;"></i>
-                <i class="fab fa-android" style="margin: 0 10px;"></i>
+            <div class="nav-logo" style="margin-bottom: 1.5rem; font-size: 2rem;">ORBIT<span class="text-gradient">GAMES</span></div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
             </div>
+            <p style="color: var(--text-muted);">&copy; 2025 Orbit Games Studio. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
     <script>
-        AOS.init({
-            duration: 1000,
-            once: true
+        // --- Preloader ---
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('preloader-hide');
+            }, 800); // Keep preloader for 800ms for effect
+        });
+
+        // --- Init AOS Animation ---
+        AOS.init({ duration: 1000, easing: 'ease-out-quart', once: true, offset: 120 });
+
+        // --- Scroll Progress Indicator ---
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+        });
+
+        // --- Mobile Menu Toggle ---
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const icon = document.querySelector('.hamburger i');
+            navLinks.classList.toggle('active');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        }
+
+        // --- Init Particles.js (Professional Tech Configuration) ---
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": ["#00EDA0", "#8A2EFF"] }, /* Using brand colors */
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.3, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                "modes": { "grab": { "distance": 180, "line_linked": { "opacity": 0.3 } } }
+            },
+            "retina_detect": true
         });
     </script>
 </body>
