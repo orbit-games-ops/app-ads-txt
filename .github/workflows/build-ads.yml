@@ -1,0 +1,38 @@
+name: Build app-ads.txt (Manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: "Environment"
+        required: true
+        default: "test"
+        type: choice
+        options:
+          - test
+          - prod
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Build ads file
+        run: ADS_ENV=${{ github.event.inputs.env }} node build_app_ads.js
+
+      - name: Commit generated files & logs
+        run: |
+          git config user.name "ads-bot"
+          git config user.email "ads-bot@users.noreply.github.com"
+          git add app-ads*.txt logs/ads-build-latest.log
+          git commit -m "Manual build (${{ github.event.inputs.env }})" || echo "No changes"
+          git push
