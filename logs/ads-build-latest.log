@@ -1,0 +1,21 @@
+BUILD: 2026-01-07T11:19:44.935Z
+ENV: test
+OUTPUT: app-ads.test.txt
+
+✅ app-ads.test.txt generated
+
+CHANGE SUMMARY
+Admob: entries=0, +0, -0, Δ0, skipped=0
+Meta: entries=0, +0, -0, Δ0, skipped=0
+Applovin: entries=0, +0, -0, Δ0, skipped=0
+Mintegral: entries=0, +0, -0, Δ0, skipped=0
+Liftoff: entries=0, +0, -0, Δ0, skipped=0
+Unity: entries=0, +0, -0, Δ0, skipped=0
+Inmobi Admob: entries=0, +0, -0, Δ0, skipped=0
+Inmobi MAX: entries=0, +0, -0, Δ0, skipped=0
+
+DUPLICATES
+None
+
+INVALID CERT IDS REMOVED
+None
