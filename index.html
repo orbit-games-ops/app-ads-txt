@@ -1,405 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orbit Games | Premium Interactive Entertainment</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <style>
-        /* --- PREMIUM VARIABLES --- */
-        :root {
-            /* Refined Palette */
-            --primary: #00EDA0; /* Electric Emerald */
-            --secondary: #8A2EFF; /* Deep Violet */
-            --bg-dark: #050507; /* Deepest Black */
-            --bg-surface: rgba(20, 20, 25, 0.7); /* Glass Surface */
-            --text-light: #ffffff;
-            --text-muted: #a0a0b0;
-            --gradient-accent: linear-gradient(135deg, var(--primary), var(--secondary));
-            --glass-border: 1px solid rgba(255, 255, 255, 0.08);
-            --glass-blur: blur(12px);
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Orbit Games LLC</title>
 
-        /* --- RESET & BASE STYLES --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            font-family: 'Open Sans', sans-serif;
-            overflow-x: hidden;
-            line-height: 1.7;
-        }
-        h1, h2, h3, h4, .nav-logo { font-family: 'Montserrat', sans-serif; font-weight: 800; letter-spacing: -0.5px; }
-        a { text-decoration: none; }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { background: var(--secondary); border-radius: 10px; }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-        /* Scroll Progress Bar */
-        #scroll-progress {
-            position: fixed; top: 0; left: 0; width: 0%; height: 3px;
-            background: var(--gradient-accent); z-index: 9999;
-        }
+<style>
 
-        /* --- PRELOADER --- */
-        #preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-dark); z-index: 10000;
-            display: flex; justify-content: center; align-items: center; flex-direction: column;
-            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-        }
-        .loader-logo {
-            font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 2rem;
-            animation: pulse 2s infinite ease-in-out;
-        }
-        .loader-logo span { color: var(--primary); }
-        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(0.95); } }
-        .preloader-hide { opacity: 0; visibility: hidden; }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-        /* --- UTILITIES --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        .text-gradient {
-            background: var(--gradient-accent); -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; display: inline-block;
-        }
+body{
+font-family:"Inter",sans-serif;
+background:black;
+color:white;
+overflow-x:hidden;
+}
 
-        /* Premium Button */
-        .btn {
-            padding: 14px 35px; border-radius: 50px; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;
-            position: relative; overflow: hidden; transition: all 0.4s ease;
-            z-index: 1; display: inline-flex; align-items: center; gap: 10px;
-        }
-        .btn-glow {
-            background: rgba(0, 237, 160, 0.1); color: var(--primary);
-            border: 1px solid var(--primary);
-            box-shadow: 0 0 15px rgba(0, 237, 160, 0.2);
-        }
-        .btn-glow::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 0%; height: 100%;
-            background: var(--gradient-accent); z-index: -1; transition: width 0.4s ease-in-out;
-        }
-        .btn-glow:hover { color: var(--bg-dark); box-shadow: 0 0 30px rgba(0, 237, 160, 0.5); border-color: transparent; }
-        .btn-glow:hover::before { width: 100%; }
+.container{
+max-width:1100px;
+margin:auto;
+padding:0 30px;
+}
 
-        /* --- NAVBAR (Glassmorphism) --- */
-        nav {
-            position: fixed; top: 0; width: 100%; padding: 1.2rem 0; z-index: 100;
-            background: rgba(5, 5, 7, 0.8); backdrop-filter: var(--glass-blur);
-            border-bottom: var(--glass-border); transition: all 0.4s ease;
-        }
-        .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo { font-size: 1.6rem; color: white; }
-        .nav-links a {
-            color: var(--text-muted); font-weight: 600; font-size: 0.9rem;
-            margin-left: 2.5rem; text-transform: uppercase; letter-spacing: 1px;
-            transition: color 0.3s; position: relative;
-        }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 2px;
-            background: var(--primary); transition: width 0.3s;
-        }
-        .nav-links a:hover { color: var(--primary); }
-        .nav-links a:hover::after { width: 100%; }
-        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; color: var(--text-light); }
+nav{
+position:fixed;
+width:100%;
+padding:28px 0;
+background:black;
+z-index:999;
+}
 
-        /* --- HERO SECTION (Particles) --- */
-        .hero {
-            min-height: 100vh; display: flex; align-items: center; position: relative;
-            overflow: hidden; padding-top: 80px;
-        }
-        #particles-js {
-            position: absolute; width: 100%; height: 100%; top: 0; left: 0;
-            background: var(--bg-dark); z-index: 1;
-        }
-        /* Subtle background image overlaying particles for depth */
-        .hero-bg-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, transparent 0%, var(--bg-dark) 90%),
-                        url('image_0.png') no-repeat center center/cover;
-            opacity: 0.2; z-index: 2; mix-blend-mode: overlay;
-        }
-        .hero-content { position: relative; z-index: 3; max-width: 900px; }
-        .hero-subtitle {
-            font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 2px;
-            text-transform: uppercase; margin-bottom: 1rem; display: block;
-        }
-        .hero h1 {
-            font-size: 5rem; line-height: 1.05; margin-bottom: 1.5rem;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .hero p { font-size: 1.3rem; color: var(--text-muted); max-width: 650px; margin-bottom: 3rem; }
+.nav-inner{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
 
-        /* --- SECTIONS COMMON --- */
-        section { padding: 8rem 0; position: relative; }
-        .section-header { text-align: center; margin-bottom: 5rem; }
-        .section-title { font-size: 3rem; margin-bottom: 1rem; display: inline-block; }
-        .section-line {
-            width: 60px; height: 4px; background: var(--gradient-accent);
-            margin: 0 auto; border-radius: 2px;
-        }
+.logo{
+font-weight:800;
+letter-spacing:3px;
+font-size:18px;
+}
 
-        /* --- EXPERTISE (Glass Cards) --- */
-        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2.5rem; }
-        .tech-card {
-            background: var(--bg-surface); backdrop-filter: var(--glass-blur);
-            border: var(--glass-border); padding: 3rem 2rem; border-radius: 20px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy transition */
-            position: relative; overflow: hidden;
-        }
-        .tech-card::before { /* Hover Gradient Glow */
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(138, 46, 255, 0.1) 0%, transparent 70%);
-            opacity: 0; transition: opacity 0.4s; z-index: -1;
-        }
-        .tech-card:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(138, 46, 255, 0.3); }
-        .tech-card:hover::before { opacity: 1; }
-        .tech-card i { font-size: 3rem; margin-bottom: 2rem; }
-        .tech-card h3 { font-size: 1.4rem; margin-bottom: 1rem; }
-        .tech-card p { color: var(--text-muted); font-size: 0.95rem; }
+.hero{
+height:100vh;
+display:flex;
+align-items:center;
+}
 
-        /* --- PORTFOLIO (3D Hover) --- */
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 3rem; }
-        .project-card {
-            border-radius: 20px; overflow: hidden;
-            background: var(--bg-surface); backdrop-filter: var(--glass-blur);
-            border: var(--glass-border); transition: all 0.5s ease;
-            transform-style: preserve-3d; perspective: 1000px;
-        }
-        .project-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); border-color: var(--primary); }
-        .project-img-wrapper { height: 280px; overflow: hidden; position: relative; }
-        .project-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-        .project-card:hover .project-img { transform: scale(1.1); }
-        .project-content { padding: 2.5rem; position: relative; z-index: 2; }
-        .badge-container { display: flex; gap: 10px; margin-bottom: 1.2rem; }
-        .badge {
-            font-size: 0.7rem; font-weight: 700; color: var(--primary);
-            background: rgba(0, 237, 160, 0.15); padding: 6px 14px;
-            border-radius: 30px; letter-spacing: 1px;
-        }
-        .project-content h3 { font-size: 1.8rem; margin-bottom: 0.8rem; }
-        .project-content p { margin-bottom: 2rem; color: var(--text-muted); }
-        .btn-text {
-            color: var(--text-light); font-weight: 700; text-transform: uppercase;
-            letter-spacing: 1px; font-size: 0.9rem; transition: 0.3s;
-        }
-        .btn-text:hover { color: var(--primary); gap: 15px; }
+.hero h1{
+font-size:64px;
+font-weight:800;
+letter-spacing:4px;
+margin-bottom:20px;
+}
 
-        /* --- FOOTER --- */
-        footer { background: #020203; padding: 5rem 0; text-align: center; border-top: var(--glass-border); }
-        .footer-social { margin: 2rem 0; }
-        .footer-social a {
-            color: var(--text-muted); font-size: 1.5rem; margin: 0 15px;
-            transition: all 0.3s; display: inline-block;
-        }
-        .footer-social a:hover { color: var(--secondary); transform: translateY(-3px); }
+.hero p{
+max-width:520px;
+color:#999;
+line-height:1.7;
+}
 
-        /* --- MOBILE RESPONSIVE --- */
-        @media (max-width: 992px) {
-            .hero h1 { font-size: 3.5rem; }
-            .nav-links {
-                position: fixed; top: 0; right: 0; height: 100vh; width: 80%; max-width: 400px;
-                background: rgba(5, 5, 7, 0.98); backdrop-filter: blur(20px);
-                flex-direction: column; justify-content: center; align-items: center; gap: 3rem;
-                transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
-            }
-            .nav-links.active { transform: translateX(0); }
-            .hamburger { display: block; z-index: 101; }
-            .project-grid { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 480px) {
-            .hero h1 { font-size: 2.8rem; }
-            .container { padding: 0 1.2rem; }
-        }
-    </style>
+section{
+padding:120px 0;
+}
+
+.section-title{
+font-size:42px;
+font-weight:700;
+margin-bottom:40px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:40px;
+}
+
+.card{
+border:1px solid rgba(255,255,255,0.1);
+padding:40px;
+transition:0.4s ease;
+}
+
+.card:hover{
+transform:translateY(-10px);
+border:1px solid white;
+}
+
+.card i{
+font-size:26px;
+margin-bottom:20px;
+}
+
+.about-text{
+max-width:600px;
+color:#aaa;
+line-height:1.8;
+}
+
+footer{
+padding:80px 0;
+border-top:1px solid rgba(255,255,255,0.08);
+text-align:center;
+}
+
+footer p{
+color:#777;
+}
+
+.line{
+width:60px;
+height:2px;
+background:white;
+margin-bottom:40px;
+}
+
+.fade-up{
+animation:fadeUp 1.2s ease forwards;
+opacity:0;
+}
+
+@keyframes fadeUp{
+from{
+transform:translateY(40px);
+opacity:0;
+}
+
+to{
+transform:translateY(0);
+opacity:1;
+}
+}
+
+@media(max-width:768px){
+.hero h1{
+font-size:40px;
+}
+}
+
+</style>
 </head>
-<body id="top">
+<body>
 
-    <div id="preloader">
-        <div class="loader-logo">ORBIT<span>GAMES</span></div>
-    </div>
+<nav>
+<div class="container nav-inner">
+<div class="logo">ORBIT GAMES LLC</div>
+</div>
+</nav>
 
-    <div id="scroll-progress"></div>
+<section class="hero">
+<div class="container" data-aos="fade-up">
 
-    <nav>
-        <div class="container nav-content">
-            <a href="#top" class="nav-logo">ORBIT<span class="text-gradient">GAMES</span></a>
-            <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
-            <div class="nav-links">
-                <a href="#expertise" onclick="toggleMenu()">Expertise</a>
-                <a href="#work" onclick="toggleMenu()">Portfolio</a>
-                <a href="https://play.google.com/store/apps/dev?id=5883999573057760065" class="btn btn-glow" style="margin-left: 2rem;">
-                    Google Play <i class="fab fa-google-play"></i>
-                </a>
-            </div>
-        </div>
-    </nav>
+<h1>
+ORBIT GAMES LLC
+</h1>
 
-    <section class="hero">
-        <div id="particles-js"></div> <div class="hero-bg-overlay"></div> <div class="container hero-content" data-aos="fade-up" data-aos-duration="1200">
-            <span class="hero-subtitle"><span class="text-gradient">/// AAA MOBILE DEVELOPMENT</span></span>
-            <h1>FORGING <br>DIGITAL REALITIES.</h1>
-            <p>We push the boundaries of mobile hardware, blending high-fidelity physics with optimized rendering to create immersive simulation experiences.</p>
-            <a href="#work" class="btn btn-glow">Explore Portfolio <i class="fas fa-arrow-down"></i></a>
-        </div>
-    </section>
+<p>
+We design high-performance mobile simulation experiences focused on realism, accessibility, and scalable gameplay systems.
+</p>
 
-    <section id="expertise">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">CORE <span class="text-gradient">CAPABILITIES</span></h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="tech-grid">
-                <div class="tech-card" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fab fa-unity text-gradient"></i>
-                    <h3>Unity Engine Mastery</h3>
-                    <p>Deep expertise in the Universal Render Pipeline (URP) for achieving console-quality visuals on mobile architecture.</p>
-                </div>
-                <div class="tech-card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-microchip text-gradient"></i>
-                    <h3>Physics Engineering</h3>
-                    <p>Proprietary vehicle dynamics systems simulating complex suspension, tire friction, and mass transfer.</p>
-                </div>
-                <div class="tech-card" data-aos="fade-up" data-aos-delay="300">
-                    <i class="fas fa-vr-cardboard text-gradient"></i>
-                    <h3>Immersive Design</h3>
-                    <p>Focusing on player agency and environmental interaction to create expansive, believable game worlds.</p>
-                </div>
-                <div class="tech-card" data-aos="fade-up" data-aos-delay="400">
-                    <i class="fas fa-bolt text-gradient"></i>
-                    <h3>Extreme Optimization</h3>
-                    <p>Utilizing DOTS and advanced profiling to ensure smooth 60 FPS gameplay across a wide range of devices.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+</div>
+</section>
 
-    <section id="work">
-        <div class="container">
-             <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">FEATURED <span class="text-gradient">TITLES</span></h2>
-                <div class="section-line"></div>
-            </div>
-            <div class="project-grid">
-                <div class="project-card" data-aos="fade-up">
-                    <div class="project-img-wrapper">
-                        <img src="image_1.png" alt="GT Racing" class="project-img">
-                    </div>
-                    <div class="project-content">
-                        <div class="badge-container">
-                            <span class="badge">ARCADE</span><span class="badge">STUNTS</span>
-                        </div>
-                        <h3>GT Car Racing Stunt</h3>
-                        <p>High-octane arcade racing featuring gravity-defying tracks and explosive aerial stunts.</p>
-                        <a href="https://play.google.com/store/apps/dev?id=5883999573057760065" class="btn-text">
-                            View on Play Store <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="project-card" data-aos="fade-up" data-aos-delay="150">
-                    <div class="project-img-wrapper">
-                        <img src="image_2.png" alt="Cargo Truck" class="project-img">
-                    </div>
-                    <div class="project-content">
-                        <div class="badge-container">
-                            <span class="badge">SIMULATION</span><span class="badge">OPEN WORLD</span>
-                        </div>
-                        <h3>Cargo Truck Driving</h3>
-                        <p>A definitive logistics simulator focusing on realistic weight distribution and long-haul economy.</p>
-                        <a href="https://play.google.com/store/apps/dev?id=5883999573057760065" class="btn-text">
-                            View on Play Store <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="project-img-wrapper">
-                        <img src="image_3.png" alt="Offroad Jeep" class="project-img">
-                    </div>
-                    <div class="project-content">
-                        <div class="badge-container">
-                            <span class="badge">OFFROAD</span><span class="badge">PHYSICS SANDBOX</span>
-                        </div>
-                        <h3>Offroad Jeep Simulator</h3>
-                        <p>Conquer extreme terrain with cutting-edge mud, water, and soft-body suspension physics.</p>
-                        <a href="https://play.google.com/store/apps/dev?id=5883999573057760065" class="btn-text">
-                            View on Play Store <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section>
+<div class="container">
 
-    <footer>
-        <div class="container">
-            <div class="nav-logo" style="margin-bottom: 1.5rem; font-size: 2rem;">ORBIT<span class="text-gradient">GAMES</span></div>
-            <div class="footer-social">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-                <a href="#"><i class="fab fa-discord"></i></a>
-            </div>
-            <p style="color: var(--text-muted);">&copy; 2025 Orbit Games Studio. All Rights Reserved.</p>
-        </div>
-    </footer>
+<div data-aos="fade-up">
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    
-    <script>
-        // --- Preloader ---
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('preloader').classList.add('preloader-hide');
-            }, 800); // Keep preloader for 800ms for effect
-        });
+<h2 class="section-title">
+ABOUT
+</h2>
 
-        // --- Init AOS Animation ---
-        AOS.init({ duration: 1000, easing: 'ease-out-quart', once: true, offset: 120 });
+<div class="line"></div>
 
-        // --- Scroll Progress Indicator ---
-        window.addEventListener('scroll', () => {
-            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (scrollTop / scrollHeight) * 100;
-            document.getElementById('scroll-progress').style.width = scrolled + '%';
-        });
+<p class="about-text">
+Orbit Games LLC is an independent mobile game development studio building physics-driven gameplay experiences for global audiences. Our work focuses on simulation systems, vehicle mechanics, and performance-optimized interactive environments designed for modern mobile platforms.
+</p>
 
-        // --- Mobile Menu Toggle ---
-        function toggleMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            const icon = document.querySelector('.hamburger i');
-            navLinks.classList.toggle('active');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        }
+</div>
 
-        // --- Init Particles.js (Professional Tech Configuration) ---
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": ["#00EDA0", "#8A2EFF"] }, /* Using brand colors */
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.3, "random": true },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
-                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-                "modes": { "grab": { "distance": 180, "line_linked": { "opacity": 0.3 } } }
-            },
-            "retina_detect": true
-        });
-    </script>
+</div>
+</section>
+
+<section>
+<div class="container">
+
+<div data-aos="fade-up">
+
+<h2 class="section-title">
+CAPABILITIES
+</h2>
+
+<div class="line"></div>
+
+</div>
+
+<div class="grid">
+
+<div class="card" data-aos="fade-up">
+<i class="fas fa-cube"></i>
+<h3>Game Engineering</h3>
+<p>Production-grade Unity mobile architecture.</p>
+</div>
+
+<div class="card" data-aos="fade-up" data-aos-delay="150">
+<i class="fas fa-car"></i>
+<h3>Simulation Systems</h3>
+<p>Vehicle dynamics and terrain interaction systems.</p>
+</div>
+
+<div class="card" data-aos="fade-up" data-aos-delay="300">
+<i class="fas fa-layer-group"></i>
+<h3>Gameplay Design</h3>
+<p>Accessible mechanics with immersive depth.</p>
+</div>
+
+<div class="card" data-aos="fade-up" data-aos-delay="450">
+<i class="fas fa-bolt"></i>
+<h3>Optimization</h3>
+<p>Smooth performance across device classes.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section>
+<div class="container">
+
+<div data-aos="fade-up">
+
+<h2 class="section-title">
+VISION
+</h2>
+
+<div class="line"></div>
+
+<p class="about-text">
+Our mission is to build clean, scalable mobile gameplay platforms that combine technical precision with intuitive player experiences.
+</p>
+
+</div>
+
+</div>
+</section>
+
+<footer>
+
+<div class="logo">
+ORBIT GAMES LLC
+</div>
+
+<p>
+© 2026 Orbit Games LLC
+</p>
+
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+AOS.init({
+
+once:true,
+duration:1200
+
+});
+
+</script>
+
 </body>
 </html>
-
